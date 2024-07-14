@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">News</string>
+    <string name="article_title_placeholder">Pixel 9 series arrives at the FCC, includes Thread</string>
+    <string name="article_desc_placeholder">Following the Pixel Watch 3, the Pixel 9 series has now arrived at the FCC for regulatory approval. With four...</string>
+    <string name="article_date_placeholder">Sun 14 Jul 2024 11:53:32 PM</string>
 </resources>

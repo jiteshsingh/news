@@ -26,6 +26,8 @@ android {
                 )
             }
         }
+
+        buildConfigField("String", "NEWS_API_KEY", "\"${project.findProperty("NEWS_API_KEY")}\"")
     }
 
     buildTypes {
@@ -47,11 +49,7 @@ android {
 
     buildFeatures {
         viewBinding = true
-        compose = true
-    }
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.13"
+        buildConfig = true
     }
 }
 
@@ -60,11 +58,16 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
+//    implementation(libs.androidx.activity.ktx)
     implementation(libs.androidx.fragment.ktx)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     annotationProcessor(libs.androidx.room.compiler)
-    kapt(libs.androidx.room.compiler)
+    kapt(libs.androidx.room.compiler) // FUTURE: use KSP
     implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.gson)
     implementation(libs.gson)
+    implementation(libs.picasso)
+    implementation(libs.shimmer)
+    implementation(libs.logging.interceptor)
 }

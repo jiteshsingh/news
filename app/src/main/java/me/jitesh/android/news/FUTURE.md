@@ -1,0 +1,2 @@
+- use jetpack compose
+- use kotlin coroutines and async flow and benchmark performance
