@@ -55,11 +55,21 @@ class ArticlesListAdapter(private val context: Context) :
 
     class WrapContentLinearLayoutManager(context: Context) :
         LinearLayoutManager(context, RecyclerView.VERTICAL, false) {
+
+        private var scrollEnabled = true
         override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State) {
             try {
                 super.onLayoutChildren(recycler, state)
             } catch (_: IndexOutOfBoundsException) {
             }
+        }
+
+        fun setScrollEnabled(enabled: Boolean) {
+            scrollEnabled = enabled
+        }
+
+        override fun canScrollVertically(): Boolean {
+            return scrollEnabled
         }
     }
 

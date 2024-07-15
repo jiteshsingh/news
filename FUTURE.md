@@ -1,2 +1,3 @@
 - use jetpack compose
 - use kotlin coroutines and async flow and benchmark performance
+- setup release builds, minify, shrinking, obfuscation, signing etc.

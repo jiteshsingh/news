@@ -1,6 +1,5 @@
 package me.jitesh.android.news.cache
 
-import android.provider.SyncStateContract.Helpers.insert
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
@@ -8,7 +7,6 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Transaction
 import me.jitesh.android.news.model.Article
-
 
 @Dao
 interface ArticleDao {

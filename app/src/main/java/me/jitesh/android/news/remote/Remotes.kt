@@ -6,13 +6,13 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
- * Contains instances for remote sources of articles.
+ * Contains instances of remote sources for articles.
  */
 object Remotes {
 
-    val newsApi by lazy {
+    val newsApi: NewsApiService by lazy {
         val logger = HttpLoggingInterceptor()
-        logger.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logger.setLevel(HttpLoggingInterceptor.Level.BASIC)
         val client = OkHttpClient.Builder().addInterceptor(logger).build()
         val retrofit = Retrofit.Builder()
             .client(client)

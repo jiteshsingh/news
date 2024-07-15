@@ -32,26 +32,13 @@ abstract class BaseActivity<T : ViewBinding>(private val viewBindingClass: Class
             // sometimes overview screen removes fullscreen flags (possibly due to a system bug);
             //   overview screen doesn't pause activity, but changes window insets;
             //   so we trigger fullscreen on inset changes, just to ensure the flags remain intact.
-//            setFullscreen()
             insets
         }
         onBackInvokedDispatcher.registerOnBackInvokedCallback(1_000) {
             onBackInvoked()
             onBackPressedDispatcher.onBackPressed()
         }
-//        MainViewModel.fullscreen.observe(this) { setFullscreen(it) }
-//        window.decorView.setImportantForAutofill(
-//            IMPORTANT_FOR_AUTOFILL_NO
-//        )
     }
-//
-//    private fun setFullscreen(fullscreen: Boolean = MainViewModel.fullscreen.value ?: false) {
-//        if (!Preferences.getBoolean(Preferences.PREF_KEY_IMMERSIVE_FULLSCREEN)) return
-//        windowInsetsController.systemBarsBehavior
-//        val insetsType = WindowInsetsCompat.Type.systemBars()
-//        if (fullscreen) windowInsetsController.hide(insetsType)
-//        else windowInsetsController.show(insetsType)
-//    }
 
     protected open fun onBackInvoked() {}
 

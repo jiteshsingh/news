@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import me.jitesh.android.news.BuildConfig
 import me.jitesh.android.news.cache.ArticleDatabase
+import me.jitesh.android.news.mainHandler
 import me.jitesh.android.news.model.Article
 import me.jitesh.android.news.remote.NewsApiService.Companion.ApiResponse
 import me.jitesh.android.news.remote.Remotes
@@ -19,10 +20,11 @@ class ArticlesViewModel : ViewModel() {
 
     val articlesList = ArticleDatabase.articleDao.getAll()
     val refreshing = MutableLiveData(false)
-    val error = MutableLiveData<String?>(null)
+    val error = MutableLiveData<String?>(null) // FUTURE: introduce error codes for user
     private val apiCallback = ApiCallback()
 
     init {
+        // trigger auto-refresh if cache is empty
         articlesList.observeForever(object : Observer<List<Article>> {
             override fun onChanged(value: List<Article>) {
                 articlesList.removeObserver(this)
@@ -32,8 +34,9 @@ class ArticlesViewModel : ViewModel() {
     }
 
     fun refresh() {
+        // fetch articles from remote, cache in db and set "refreshing" to false.
         refreshing.value = true
-        // get from remote, store in db and set "refreshing" to false
+        error.value = null
         Remotes.newsApi.listRepos(BuildConfig.NEWS_API_KEY, "us", "technology")
             .enqueue(apiCallback)
     }

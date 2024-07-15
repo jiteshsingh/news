@@ -14,7 +14,6 @@ interface NewsApiService {
     }
 
     // FUTURE: write an okhttp interceptor to automatically inject apiKey
-    // FUTURE: add option for choosing multiple countries and categories as a pref
     @GET("top-headlines?sortBy=publishedAt")
     fun listRepos(
         @Query("apiKey") apiKey: String,

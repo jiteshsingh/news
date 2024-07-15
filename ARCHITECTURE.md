@@ -1,0 +1,13 @@
+- Follows the standard MVVM architecture
+- Modules
+    - model: for defining entities
+    - view: for user interactions
+    - viewmodel: for storing the state of view and business logic
+    - remote: for API calls
+    - cache: for local data persistence (also the single source of truth for data)
+
+- Uses android architecture components for MVVM
+- Uses retrofit for API calls
+- Uses androidx room for local cache / persistence
+- Uses picasso for loading images
+- Uses facebook shimmer library for refresh indication

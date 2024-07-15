@@ -2,5 +2,5 @@
 
     <style name="Base.Theme.News" parent="Theme.Material3.DayNight.NoActionBar" />
 
-    <style name="Theme.Planner" parent="Base.Theme.News" />
+    <style name="Theme.News" parent="Base.Theme.News" />
 </resources>
