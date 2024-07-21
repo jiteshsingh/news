@@ -7,6 +7,8 @@ import android.view.View.VISIBLE
 import androidx.activity.viewModels
 import me.jitesh.android.news.databinding.ArticlesActivityBinding
 import me.jitesh.android.news.viewmodel.ArticlesViewModel
+import me.jitesh.android.news.viewmodel.ArticlesViewModel.Companion.categories
+import me.jitesh.android.news.viewmodel.ArticlesViewModel.Companion.countries
 
 /**
  * Launcher activity containing list of articles.
@@ -21,9 +23,24 @@ class ArticlesActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val adaptor = ArticlesListAdapter(this)
+
+        // init view
+        val adaptor = ArticleListAdapter(this)
         binding.list.layoutManager = adaptor.layoutManager
         binding.list.adapter = adaptor
+        binding.country.adapter = CountryListAdapter(this, countries)
+        binding.country.setSelection(countries.indexOf(articlesViewModel.country.value), false)
+        binding.category.setSelection(categories.indexOf(articlesViewModel.category.value), false)
+
+        // attach event listeners
+        binding.country.onItemSelectedListener = AdapterViewSelectionListener { _, position ->
+            articlesViewModel.setCountry(countries[position!!])
+        }
+        binding.category.onItemSelectedListener = AdapterViewSelectionListener { _, position ->
+            articlesViewModel.setCategory(categories[position!!])
+        }
+
+        // bind with data
         articlesViewModel.articlesList.observe(this) {
             // if list is empty then we swap the list view with an empty indicator view
             val empty = it.isEmpty()
@@ -55,6 +72,7 @@ class ArticlesActivity :
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (articlesViewModel.refreshing.value == true) return true // consume event
         if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN && event?.isLongPress == true) {
             articlesViewModel.refresh()
             return true

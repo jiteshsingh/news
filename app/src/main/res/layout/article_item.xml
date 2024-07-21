@@ -31,7 +31,15 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:text="@string/article_desc_placeholder"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textAppearance="@style/TextAppearance.Material3.BodyMedium" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/article_desc_placeholder"
+        android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textColor="?android:attr/textColorSecondary" />
 
     <com.google.android.material.textview.MaterialTextView

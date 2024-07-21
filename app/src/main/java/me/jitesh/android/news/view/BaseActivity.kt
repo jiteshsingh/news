@@ -1,9 +1,11 @@
 package me.jitesh.android.news.view
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.WindowInsets
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updatePadding
@@ -34,13 +36,17 @@ abstract class BaseActivity<T : ViewBinding>(private val viewBindingClass: Class
             //   so we trigger fullscreen on inset changes, just to ensure the flags remain intact.
             insets
         }
-        onBackInvokedDispatcher.registerOnBackInvokedCallback(1_000) {
-            onBackInvoked()
-            onBackPressedDispatcher.onBackPressed()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            onBackInvokedDispatcher.registerOnBackInvokedCallback(1_000) {
+                onBackInvoked()
+                onBackPressedDispatcher.onBackPressed()
+            }
         }
     }
 
-    protected open fun onBackInvoked() {}
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    protected open fun onBackInvoked() {
+    }
 
     open fun constructBinding(): T {
         return viewBindingClass.getMethod("inflate", LayoutInflater::class.java)

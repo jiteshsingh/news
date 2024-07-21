@@ -1,5 +1,6 @@
 package me.jitesh.android.news.remote
 
+import me.jitesh.android.news.BuildConfig
 import me.jitesh.android.news.model.Article
 import retrofit2.Call
 import retrofit2.http.GET
@@ -13,11 +14,10 @@ interface NewsApiService {
         data class ApiResponse(val status: String, val articles: List<Article>)
     }
 
-    // FUTURE: write an okhttp interceptor to automatically inject apiKey
     @GET("top-headlines?sortBy=publishedAt")
     fun listRepos(
-        @Query("apiKey") apiKey: String,
         @Query("country") country: String,
-        @Query("category") category: String
+        @Query("category") category: String,
+        @Query("apiKey") apiKey: String = BuildConfig.NEWS_API_KEY,
     ): Call<ApiResponse>
 }
